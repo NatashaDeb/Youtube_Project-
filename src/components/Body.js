@@ -4,7 +4,6 @@ import SideBar from "./SideBar";
 const Body = () =>{
     return(
         <div className="flex">
-            Body
             <SideBar/>
             <MainContainer/>
         </div>
