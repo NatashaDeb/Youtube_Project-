@@ -1,9 +1,14 @@
 
 import './App.css';
+import Body from './components/Body';
+import Header from './components/Header';
 
 function App() {
   return (
-      <h1 className='bg-slate-500'>Hello All!!</h1>
+     <div>
+      <Header/>
+      <Body/>
+     </div>
   );
 }
 
