@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 
 const Header = () => {
-
+ 
     const dispatch = useDispatch();
 
     const toggleMenuHandler = () =>{
@@ -18,11 +18,13 @@ const Header = () => {
           src="https://tse4.mm.bing.net/th?id=OIP.9p-z5zqBkdA8t51iaBWo0wHaHa&pid=Api&P=0&h=180"
           alt="menu"
         ></img>
+        <a className="cursor-pointer" src="http://localhost:3000/">
         <img
           className="h-8 mx-2"
           src="https://tse4.mm.bing.net/th?id=OIP.gdsYnuzqxcjHkrkFHhMYFAHaBw&pid=Api&P=0&h=180"
           alt="logo"
         ></img>
+        </a>
       </div>
       <div className="flex col-span-10 px-15">
         <input
@@ -45,3 +47,4 @@ const Header = () => {
 };
 
 export default Header;
+//
