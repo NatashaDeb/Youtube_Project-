@@ -7,12 +7,10 @@ const VideoCard = ({ videoInfo }) => {
             <div>wait for info to come!</div>
         )
     }
-
-    console.log(videoInfo);
     const{snippet, statistics} = videoInfo;
     const{channelTitle, title, thumbnails} = snippet;
     const{viewCount} = statistics;
-  return (
+    return (
     <div className='p-4 m-4 w-80 shadow-lg'>
         <img className='rounded-lg' alt='thumbnail' src={thumbnails.medium.url} />
         <ul>
@@ -23,5 +21,13 @@ const VideoCard = ({ videoInfo }) => {
     </div>
   );
 };
+
+export const AdVideoCard = ({ videoInfo }) => {
+    return(
+        <div className='p-1 m-1 border border-red-800'>
+            <VideoCard  videoInfo = {videoInfo}></VideoCard>
+        </div>
+    )
+}
 
 export default VideoCard;

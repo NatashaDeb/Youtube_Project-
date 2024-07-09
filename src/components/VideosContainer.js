@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { YOUTUBE_VIDEOS_API } from "../utils/constants";
-import VideoCard from "./VideoCard";
+import VideoCard, { AdVideoCard } from "./VideoCard";
 import { Link } from "react-router-dom";
 
 const VideosContainer = () => {
@@ -10,16 +10,24 @@ const VideosContainer = () => {
   }, []);
 
   const getVideos = async () => {
-    const data = await fetch(YOUTUBE_VIDEOS_API);
-    const json = await data.json();
+    try {
+    const response = await fetch(YOUTUBE_VIDEOS_API);
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+    const data = await response.json();
     //console.log(json)
-    setVideoList(json.items);
+    setVideoList(data.items);
+  } catch (error) {
+    console.error('Fetch error: ', error);
+  }
   };
 
   return (
     <div className="flex flex-wrap">
+      {videoList[0] && <AdVideoCard videoInfo={videoList[16]}/>}
       {videoList.map((videoInfo) => (
-        <Link to={"/watch?v="+videoInfo.id} ><VideoCard key={videoInfo.id} videoInfo={videoInfo} /></Link>
+        <Link key={videoInfo.id} to={"/watch?v="+videoInfo.id} ><VideoCard  videoInfo={videoInfo} /></Link> 
       ))}
     </div>
   );
