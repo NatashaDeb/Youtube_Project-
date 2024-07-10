@@ -1,17 +1,27 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { useEffect, useState } from "react";
 import { SEARCH_SUGGESTION_API } from "../utils/constants";
+import store from "../utils/store";
+import { cacheResults } from "../utils/searchSlice";
+import { json } from "react-router-dom";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sugesstions, setSugesstions] = useState([]);
   const [showSugesstions, setshowSugesstions] = useState(false);
   const dispatch = useDispatch();
+  const searchCache = useSelector((store) => store.search);
 
   useEffect(() => {
     if (searchQuery) {
-      const timer = setTimeout(() => getSearchSuggestions(), 200); //after 200ms
+      const timer = setTimeout(() => {
+        if (searchCache[searchQuery]) {
+          setSugesstions(searchCache[searchQuery]);
+        } else {
+          getSearchSuggestions();
+        } //200ms debouncing applied
+      }, 200);
 
       return () => {
         clearTimeout(timer);
@@ -28,6 +38,11 @@ const Header = () => {
       const data = await response.json();
       console.log(data[1]);
       setSugesstions(data[1]);
+      dispatch(
+        cacheResults({
+          [searchQuery]: data[1],
+        })
+      );
     } catch (error) {
       console.error("Fetch error: ", error);
     }
@@ -60,8 +75,8 @@ const Header = () => {
             type="text"
             className="w-1/2 border p-1 border-gray-400 rounded-l-full"
             value={searchQuery}
-            onFocus={()=> setshowSugesstions(true)}
-            onBlur={()=> setshowSugesstions(false)}
+            onFocus={() => setshowSugesstions(true)}
+            onBlur={() => setshowSugesstions(false)}
             onChange={(e) => {
               setSearchQuery(e.target.value);
             }}
