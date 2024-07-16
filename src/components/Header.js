@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { SEARCH_SUGGESTION_API } from "../utils/constants";
 import store from "../utils/store";
 import { cacheResults } from "../utils/searchSlice";
-import { json } from "react-router-dom";
+
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
+import CommentsContainer from "./CommentsContainer";
 
 const WatchPage = () => {
   const [video, setVideo] = useState(null);
@@ -47,7 +48,8 @@ const WatchPage = () => {
   } = video;
 
   return (
-    <div className="px-10 py-5">
+    <div className="flex flex-col">
+     <div className="px-10 py-5">
       <iframe
         width="825"
         height="472"
@@ -73,6 +75,9 @@ const WatchPage = () => {
         <p className="mt-3">{description}</p>
       </div>
     </div>
+    <CommentsContainer/>
+    </div>
+   
   );
 };
 
