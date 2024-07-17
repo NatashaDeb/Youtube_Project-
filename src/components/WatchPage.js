@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import CommentsContainer from "./CommentsContainer";
+import LiveChat from "./LiveChat";
 
 const WatchPage = () => {
   const [video, setVideo] = useState(null);
@@ -49,8 +50,10 @@ const WatchPage = () => {
 
   return (
     <div className="flex flex-col">
-     <div className="px-10 py-5">
-      <iframe
+     <div className="px-10 py-5 ">
+      <div className="flex">
+     <div>
+     <iframe
         width="825"
         height="472"
         src={`https://www.youtube.com/embed/${videoId}`}
@@ -60,6 +63,12 @@ const WatchPage = () => {
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
       ></iframe>
+     </div>
+      <div className=" w-full">
+        <LiveChat></LiveChat>
+      </div>
+      </div>
+     
       
         <ul className="mt-5">
         <div className="flex">

@@ -51,6 +51,7 @@ const Header = () => {
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
+  
 
   return (
     <div className="grid grid-flow-col p-5 m-2 shadow-lg">
