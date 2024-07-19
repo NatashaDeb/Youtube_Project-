@@ -2,9 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { useEffect, useState } from "react";
 import { SEARCH_SUGGESTION_API } from "../utils/constants";
-import store from "../utils/store";
 import { cacheResults } from "../utils/searchSlice";
-
+import {setSearchText} from "../utils/searchTextSlice"
+ 
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -52,6 +52,15 @@ const Header = () => {
     dispatch(toggleMenu());
   };
   
+  const handleSearch = () => {
+    dispatch(setSearchText(searchQuery));
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   return (
     <div className="grid grid-flow-col p-5 m-2 shadow-lg">
@@ -81,8 +90,12 @@ const Header = () => {
             onChange={(e) => {
               setSearchQuery(e.target.value);
             }}
+            onKeyPress={handleKeyPress}
           ></input>
-          <button className="border border-black p-1 rounded-r-full bg-gray-100">
+          <button 
+            className="border border-black p-1 rounded-r-full bg-gray-100"
+            onClick={handleSearch}
+          >
             🔍
           </button>
         </div>
